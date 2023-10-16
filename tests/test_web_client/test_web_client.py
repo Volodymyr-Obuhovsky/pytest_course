@@ -1,11 +1,12 @@
 import responses
+import os
 from web_client.web_service import BookCover
 
 
 @responses.activate
 def test_get_response():
-    file_path = "book_cover.jpg"
-    with open(file_path, "rb") as image:
+    file = os.path.abspath("book_cover.jpg")
+    with open(file, "rb") as image:
         valid_answer = image.read()
         expected_result = valid_answer
 
@@ -18,3 +19,4 @@ def test_get_response():
                            file="cddvanKCLOThJFq7wGuLseCyACCuCS0epHZ5BvR1.jpg")
     web_client_get_response = book_cover.get_response().content
     assert web_client_get_response == expected_result
+

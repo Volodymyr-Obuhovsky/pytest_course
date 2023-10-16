@@ -13,7 +13,11 @@ class CustomEnvVariables(BaseSettings):
     DATABASE_NAME: str
 
     @property
-    def DATABASE_URL(self):
+    def DATABASE_URL_asyncpg(self):
+        return (f"postgresql+asyncpg://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:"
+                f"{self.DATABASE_PORT}/{self.DATABASE_NAME}")
+    @property
+    def DATABASE_URL_psycopg(self):
         return (f"postgresql+psycopg2://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:"
                 f"{self.DATABASE_PORT}/{self.DATABASE_NAME}")
 

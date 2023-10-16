@@ -3,11 +3,9 @@ import json
 from app.exceptions import InsertError, ValidDataError
 from app.models import Computer, Owners, DetailedInfo, Physical, DbTables
 from app.crud.crud import ComputerQuery, OwnersQuery, DetailedInfoQuery, PhysicalQuery
-from app.conect_with_db import Base, engine, db_context
+from app.conect_with_db import Base, sync_engine, db_context
 from app.services.base_service import BaseService
 from app.schemas.pydantic.computers.computer_validation import ComputerValidation
-
-Base.metadata.create_all(bind=engine)
 
 
 class OwnersService(BaseService):

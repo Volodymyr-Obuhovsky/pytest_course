@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from app.conect_with_db import engine, Base
+from app.conect_with_db import sync_engine, Base
 from app.config import settings
 
 
@@ -18,9 +18,9 @@ def started_db_session():
     # this is preparation for settings testing environment
     if settings.MODE == "TEST":
         print(f"\nTesting started with {settings.DATABASE_NAME}")
-        Base.metadata.drop_all(bind=engine)
+        Base.metadata.drop_all(bind=sync_engine)
         # and after, creates all needed tables in db
-        Base.metadata.create_all(bind=engine)
+        Base.metadata.create_all(bind=sync_engine)
         print("\nPytest is working...")
         # current fixture passes control processes (script) execution to pytest
         yield
